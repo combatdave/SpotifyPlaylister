@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>poppunkr</h1>
+
+    Enter the url of the thread below then hit "go" to generate your playlist.
+
+    <br>
+    <br>
+
+    <div class="row">
+    <form action="/thread" method="get" role="form">
+          <div class="form-group">
+              <input class="form-control input-lg" id="url" type="text" name="url">
+          </div>
+        <input type="submit" class="btn btn-default" value="Go!">
+    </form>
+    </div>
+</div>
+</body>
+</html>
