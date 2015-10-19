@@ -2,6 +2,7 @@ import praw
 import re
 import spotipy
 import sys
+import random
 
 
 def GetSubmissionFromThread(threadurl):
@@ -16,7 +17,8 @@ def PopPunkify(text):
                      "twy": "the wonder years",
                      "fys": "four year strong",
                      "4ys": "four year strong",
-                     "bmth": "bring me the horizon"}
+                     "bmth": "bring me the horizon",
+                     "nfg": "new found glory"}
 
     text = text.lower()
     for k, v in abbreviations.iteritems():
@@ -29,10 +31,12 @@ def PopPunkify(text):
 
 def GetSongsFromSubmission(submission):
     bracketmatch = re.compile("\[(.*?)\]")
-    flat_comments = praw.helpers.flatten_tree(submission.comments)
 
-    bodies = [submission.selftext]
-    bodies += [c.body for c in flat_comments]
+    acceptedcomments = [c for c in submission.comments if c.score > 0]
+
+    flat_comments = praw.helpers.flatten_tree(acceptedcomments)
+
+    bodies = [c.body for c in flat_comments]
 
     print len(bodies), "comments to look through..."
 
@@ -113,6 +117,9 @@ def DoWork(auth_token, threadurl):
             notfound.append(songname)
         sys.stdout.write(".")
     print ""
+
+    tracklist = list(set(tracklist))
+    random.shuffle(tracklist)
 
     sp.user_playlist_add_tracks(userid, created_playlist["id"], tracklist)
 
