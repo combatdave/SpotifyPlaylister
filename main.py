@@ -18,7 +18,8 @@ def PopPunkify(text):
                      "fys": "four year strong",
                      "4ys": "four year strong",
                      "bmth": "bring me the horizon",
-                     "nfg": "new found glory"}
+                     "nfg": "new found glory",
+                     "ftsk": "forever the sickest kids"}
 
     text = text.lower()
     for k, v in abbreviations.iteritems():
